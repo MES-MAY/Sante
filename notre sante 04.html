@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Santé – Votre allié santé & bien-être</title>
+    <meta name="description" content="Régimes personnalisés, motivation, conseils et témoignages pour transformer votre santé">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #55b6a9;
+            --primary-dark: #33796e;
+            --primary-light: #e8f5f3;
+            --accent: #f67280;
+            --accent-light: #fde8eb;
+            --bg: #f7fafc;
+            --white: #fff;
+            --text: #28313b;
+            --text-light: #5a6778;
+            --muted: #a3b1c6;
+            --card: #f3f6fb;
+            --shadow: 0 6px 32px 0 rgba(34, 50, 84, 0.07), 0 1.5px 6px 0 rgba(34, 50, 84, 0.08);
+            --shadow-hover: 0 12px 48px 0 rgba(85, 182, 169, 0.17), 0 4px 18px 0 rgba(246, 114, 128, 0.15);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --transition: 0.25s cubic-bezier(.47,1.64,.41,.8);
+            --section-padding: 100px 0;
+        }
+        * {margin:0; padding:0; box-sizing:border-box;}
+        html, body {background:var(--bg); color:var(--text); font-family:'Montserrat', Arial, sans-serif; scroll-behavior:smooth; line-height:1.7;}
+        a {color:var(--primary); text-decoration:none; transition:color var(--transition);}
+        a:hover {color:var(--accent);}
+        .container {max-width:1200px; margin:0 auto; padding:0 24px;}
+        section {padding:var(--section-padding); position:relative;}
+        .btn {
+            padding:14px 36px; border-radius:var(--radius); border:none; font-size:1.08rem; font-weight:700;
+            cursor:pointer; background:var(--primary); color:var(--white); box-shadow:var(--shadow); transition:var(--transition);
+            display:inline-flex; align-items:center; gap:8px;
+        }
+        .btn:hover {background:var(--primary-dark); box-shadow:var(--shadow-hover); transform:translateY(-2px);}
+        .btn-outline {background:transparent; color:var(--white); border:2px solid var(--white);}
+        .btn-outline:hover {background:var(--white); color:var(--primary);}
+        .btn-accent {background:var(--accent);}
+        .btn-accent:hover {background:var(--primary-dark);}
+        .text-center {text-align:center;}
+        .mt-20 {margin-top:20px;}
+        .mt-40 {margin-top:40px;}
+
+        /* Header */
+        header {
+            background:var(--white); box-shadow:var(--shadow); position:sticky; top:0; z-index:999;
+            transition:all 0.3s ease;
+        }
+        header.scrolled {
+            box-shadow:0 4px 20px rgba(34, 50, 84, 0.1);
+        }
+        .header-container {
+            display:flex; align-items:center; justify-content:space-between; padding:18px 0;
+            transition:padding 0.3s ease;
+        }
+        header.scrolled .header-container {
+            padding:12px 0;
+        }
+        .logo {display:flex; align-items:center; gap:12px;}
+        .logo img {height:48px; transition:height 0.3s ease;}
+        header.scrolled .logo img {height:40px;}
+        .logo h1 {
+            font-family:'Playfair Display',serif; color:var(--primary-dark); font-weight:700; font-size:2rem;
+            transition:font-size 0.3s ease;
+        }
+        header.scrolled .logo h1 {font-size:1.7rem;}
+        nav ul {display:flex; gap:36px; list-style:none;}
+        nav ul li a {
+            font-weight:600; letter-spacing:.01em; position:relative; padding:4px 0;
+            transition:all 0.3s ease;
+        }
+        nav ul li a:after {
+            content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+            background:var(--accent); transition:width 0.3s ease;
+        }
+        nav ul li a:hover:after, nav ul li a.active:after {width:100%;}
+        nav ul li a.active,
+        nav ul li a:hover {color:var(--accent);}
+        .mobile-menu-btn {
+            display:none; background:none; border:none; font-size:2rem; margin-top:8px;
+            color:var(--primary); transition:color 0.3s ease; cursor:pointer;
+        }
+        .mobile-menu-btn:hover {color:var(--accent);}
+        @media (max-width:900px) {nav ul{gap:18px;}}
+        @media (max-width:768px){
+            .header-container{flex-direction:row; gap:0; align-items:center;}
+            nav{width:100%; display:none; position:absolute; top:100%; left:0; background:var(--white); box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+            nav.active{display:block; padding:20px 0;}
+            nav ul{flex-direction:column; gap:0; padding:0 24px;}
+            nav ul li {border-bottom:1px solid var(--primary-light);}
+            nav ul li a {display:block; padding:15px 0;}
+        }
+
+        /* Hero */
+        .hero {
+            background:linear-gradient(120deg,rgba(85,182,169,0.86) 0%,rgba(246,114,128,0.23) 100%), url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            min-height:90vh; display:flex; align-items:center; color:var(--white); position:relative;
+        }
+        .hero::before {content:"";position:absolute;left:0;top:0;width:100%;height:100%;background:rgba(34,50,84,0.12);}
+        .hero-content {
+            position:relative; z-index:3; text-align:center; margin:auto; max-width:900px;
+            padding:40px 0;
+        }
+        .hero h2 {
+            font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:700; margin-bottom:18px; color:#fff;
+            text-shadow:0 2px 16px rgba(34,50,84,.18); line-height:1.2;
+        }
+        .hero p {
+            font-size:1.3rem; color:rgba(255,255,255,0.85); margin-bottom:38px; font-weight:500;
+            max-width:700px; margin-left:auto; margin-right:auto;
+        }
+        .hero-btns {display:flex;gap:18px;justify-content:center; flex-wrap:wrap;}
+        .hero-stats {
+            display:flex; justify-content:center; gap:30px; margin-top:54px; flex-wrap:wrap;
+        }
+        .stat-item {
+            background:rgba(255,255,255,0.13); box-shadow:0 2px 16px 0 rgba(34,50,84,.07); border-radius:14px;
+            padding:20px 28px; min-width:120px; backdrop-filter:blur(5px); transition:transform var(--transition);
+        }
+        .stat-item:hover {transform:translateY(-5px);}
+        .stat-item h3 {font-size:2rem; font-weight:700; color:var(--white); margin-bottom:5px;}
+        .stat-item p {margin-top:5px; color:#f1f1f1; font-weight:500; font-size:0.9rem;}
+
+        /* Section Titles */
+        .section-title {text-align:center; margin-bottom:52px; position:relative;}
+        .section-title h2 {
+            font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--primary-dark); margin-bottom:12px;
+            position:relative; display:inline-block;
+        }
+        .section-title h2:after {
+            content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px;
+            height:3px; background:var(--accent); border-radius:3px;
+        }
+        .section-title p {
+            color:var(--text-light); font-size:1.12rem; max-width:700px; margin:0 auto;
+        }
+
+        /* Features */
+        .features-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px;}
+        .feature-card {
+            background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+            padding:38px 26px 30px; text-align:center; border:1.5px solid #e9ecf1; position:relative; transition:all var(--transition);
+            overflow:hidden;
+        }
+        .feature-card:hover {
+            box-shadow:var(--shadow-hover); transform:translateY(-5px);
+        }
+        .feature-card:before {
+            content:''; position:absolute; top:0; left:0; width:100%; height:5px;
+            background:var(--primary); transition:all var(--transition);
+        }
+        .feature-card:hover:before {height:8px; background:var(--accent);}
+        .feature-icon {
+            width:66px; height:66px; margin:0 auto 20px; background:linear-gradient(140deg,#e8fcf9 80%,#fce4ec 100%);
+            display:flex; align-items:center; justify-content:center; border-radius:50%; color:var(--primary); font-size:2rem;
+            box-shadow:0 2px 12px 0 rgba(85,182,169,0.10); transition:all var(--transition);
+        }
+        .feature-card:hover .feature-icon {
+            transform:rotate(15deg) scale(1.1); background:linear-gradient(140deg,#fce4ec 80%,#e8fcf9 100%);
+            color:var(--accent);
+        }
+        .feature-card h3 {color:var(--primary-dark); font-size:1.32rem; margin-bottom:10px; font-weight:600;}
+        .feature-card p {font-size:1.02rem; color:var(--text);}
+
+        /* Régimes Section */
+        .regime-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 36px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .regime-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 0 0 28px 0;
+            flex: 1 1 340px;
+            max-width: 385px;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+            border: 1.5px solid #e9ecf1;
+            transition: all var(--transition);
+            position: relative;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+        .regime-card-large {
+            min-height: 490px;
+        }
+        .regime-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-7px);
+        }
+        .regime-img {
+            width: 100%; height: 180px; overflow: hidden; background: #eaf5f3;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-bottom: 0;
+        }
+        .regime-img img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform var(--transition);
+        }
+        .regime-card:hover .regime-img img {
+            transform: scale(1.07);
+        }
+        .regime-age {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin: 19px 0 0 0;
+            letter-spacing: .01em;
+            padding: 0 26px;
+        }
+        .regime-goal {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.14rem;
+            padding: 0 26px;
+        }
+        .regime-goal span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .regime-keyfoods,
+        .regime-tips {
+            color: var(--text);
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 26px;
+        }
+        .regime-keyfoods i,
+        .regime-tips i {
+            color: var(--primary);
+            font-size: 1.19em;
+        }
+        .regime-tips i {
+            color: var(--accent);
+        }
+        .regime-keyfoods span,
+        .regime-tips span {
+            font-weight: 100;
+        }
+        @media (max-width: 1100px) {
+            .regime-cards-container {gap: 22px;}
+            .regime-card {max-width: 50%; min-width: 220px;}
+        }
+        @media (max-width: 800px) {
+            .regime-cards-container {flex-direction: column; gap: 28px; align-items: center;}
+            .regime-card {max-width: 100%; min-width: 0;}
+        }
+
+        /* Vidéos Section */
+        .video-container {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:28px;
+        }
+        .video-card {
+            background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
+            transition:all var(--transition); position:relative;
+        }
+        .video-card:hover {
+            box-shadow:var(--shadow-hover); transform:translateY(-5px);
+        }
+        .video-thumbnail {
+            position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+        }
+        .video-thumbnail iframe {
+            position:absolute; top:0; left:0; width:100%; height:100%; border:none;
+            transition:transform var(--transition);
+        }
+        .video-card:hover .video-thumbnail iframe {
+            transform:scale(1.03);
+        }
+        .video-info {
+            padding:20px; position:relative;
+        }
+        .video-info h3 {
+            margin-bottom:8px; color:var(--primary-dark); font-size:1.18rem;
+            transition:color var(--transition);
+        }
+        .video-card:hover .video-info h3 {
+            color:var(--accent);
+        }
+        .video-info p {
+            color:var(--muted); font-size:1rem; margin-bottom:10px;
+        }
+        .video-meta {
+            display:flex; gap:15px; align-items:center;
+        }
+        .video-duration,
+        .video-views {
+            display:flex; align-items:center; gap:5px;
+            color:var(--text-light); font-size:0.9rem;
+        }
+        .video-duration i {color:var(--accent);}
+        .video-views i {color:var(--primary);}
+
+        /* Storytelling */
+        .story-container {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:26px;
+        }
+        .story-card {
+            background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:30px 24px;
+            transition:all var(--transition); position:relative; overflow:hidden;
+            border:1px solid var(--primary-light);
+        }
+        .story-card:hover {
+            box-shadow:var(--shadow-hover); transform:translateY(-5px);
+        }
+        .story-card:before {
+            content:''; position:absolute; top:0; left:0; width:5px; height:0;
+            background:var(--accent); transition:all var(--transition);
+        }
+        .story-card:hover:before {height:100%;}
+        .story-card h3 {
+            color:var(--primary-dark); margin-bottom:8px; font-size:1.08rem;
+            position:relative; z-index:1;
+        }
+        .story-card p {
+            color:var(--text); font-size:1.01rem; position:relative; z-index:1;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:30px;
+        }
+        .testimonial-card {
+            background:var(--white); padding:30px; border-radius:var(--radius); box-shadow:var(--shadow);
+            transition:all var(--transition); border:1px solid var(--primary-light);
+        }
+        .testimonial-card:hover {
+            box-shadow:var(--shadow-hover); transform:translateY(-5px);
+        }
+        .testimonial-text {
+            font-style:italic; margin-bottom:20px; color:var(--muted); position:relative;
+            padding-left:20px;
+        }
+        .testimonial-text:before {
+            content:'\201C'; position:absolute; left:0; top:0;
+            color:var(--primary-light); font-size:3rem; line-height:1;
+        }
+        .testimonial-author {
+            display:flex; align-items:center; gap:13px;
+        }
+        .author-img {
+            width:52px; height:52px; border-radius:50%; overflow:hidden;
+            border:3px solid var(--primary-light); transition:all var(--transition);
+        }
+        .testimonial-card:hover .author-img {
+            border-color:var(--accent);
+        }
+        .author-img img {
+            width:100%; height:100%; object-fit:cover;
+        }
+        .author-info h4 {
+            color:var(--primary-dark); font-size:1.02rem; margin-bottom:3px;
+        }
+        .author-info p {
+            color:var(--muted); font-size:0.92rem;
+        }
+        .rating {
+            color:#fdcb6e; margin-top:4px; font-size:1rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding:80px 0; background:linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+            color:var(--white); position:relative; overflow:hidden;
+        }
+        .newsletter:before {
+            content:''; position:absolute; top:-50px; right:-50px; width:200px; height:200px;
+            background:rgba(255,255,255,0.1); border-radius:50%;
+        }
+        .newsletter:after {
+            content:''; position:absolute; bottom:-80px; left:-80px; width:300px; height:300px;
+            background:rgba(255,255,255,0.1); border-radius:50%;
+        }
+        .newsletter .section-title h2 {color:var(--white);}
+        .newsletter .section-title p {color:rgba(255,255,255,0.85);}
+        .newsletter-form {
+            display:flex; max-width:510px; margin:30px auto 0; border-radius:var(--radius);
+            position:relative; z-index:1;
+        }
+        .newsletter-form input {
+            flex:1; padding:14px 20px; border:none; border-radius:var(--radius) 0 0 var(--radius);
+            font-size:1rem; transition:all var(--transition);
+        }
+        .newsletter-form input:focus {
+            outline:none; box-shadow:0 0 0 2px var(--accent);
+        }
+        .newsletter-form button {
+            padding:0 26px; background:var(--white); color:var(--primary-dark); border:none;
+            border-radius:0 var(--radius) var(--radius) 0; cursor:pointer; font-size:1.07rem;
+            font-weight:700; transition:all var(--transition); display:flex; align-items:center; gap:8px;
+        }
+        .newsletter-form button:hover {
+            background:var(--accent-light); color:var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background:var(--primary-dark); color:var(--white); padding:72px 0 24px;
+            position:relative;
+        }
+        footer:before {
+            content:''; position:absolute; top:0; left:0; width:100%; height:10px;
+            background:linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        .footer-container {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:30px;
+            margin-bottom:40px; position:relative; z-index:1;
+        }
+        .footer-column h3 {
+            color:var(--white); margin-bottom:18px; font-size:1.13rem; position:relative;
+            padding-bottom:10px;
+        }
+        .footer-column h3:after {
+            content:''; position:absolute; bottom:0; left:0; width:40px; height:2px;
+            background:var(--accent);
+        }
+        .footer-column p {
+            color:rgba(255,255,255,0.85); margin-bottom:14px; font-size:1em;
+        }
+        .footer-column ul {
+            list-style:none;
+        }
+        .footer-column ul li {
+            margin-bottom:11px;
+        }
+        .footer-column ul li a {
+            color:rgba(255,255,255,0.8); transition:all var(--transition);
+            display:flex; align-items:center; gap:7px;
+        }
+        .footer-column ul li a:hover {
+            color:var(--accent); transform:translateX(5px);
+        }
+        .footer-column ul li a i {
+            margin-right:7px; color:var(--accent); font-size:0.8em;
+        }
+        .social-links {
+            display:flex; gap:14px; margin-top:14px;
+        }
+        .social-links a {
+            width:38px; height:38px; background:rgba(255,255,255,0.12); border-radius:50%;
+            display:flex; align-items:center; justify-content:center; color:var(--white);
+            font-size:1.1rem; transition:all var(--transition);
+        }
+        .social-links a:hover {
+            background:var(--accent); transform:translateY(-3px);
+        }
+        .copyright {
+            text-align:center; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08);
+            font-size:0.94rem; color:rgba(255,255,255,0.7); position:relative; z-index:1;
+        }
+        .back-to-top {
+            position:fixed; bottom:30px; right:30px; width:48px; height:48px; background:var(--accent);
+            color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
+            font-size:1.25rem; cursor:pointer; opacity:0; visibility:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.19);
+            transition:all var(--transition); z-index:999;
+        }
+        .back-to-top.active {
+            opacity:1; visibility:visible;
+        }
+        .back-to-top:hover {
+            background:var(--primary-dark); transform:translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {opacity:0; transform:translateY(20px);}
+            to {opacity:1; transform:translateY(0);}
+        }
+        .fade-in {
+            animation:fadeIn 0.8s ease forwards;
+        }
+        .delay-1 {animation-delay:0.2s;}
+        .delay-2 {animation-delay:0.4s;}
+        .delay-3 {animation-delay:0.6s;}
+
+        /* Responsive Adjustments */
+        @media (max-width:600px) {
+            :root {--section-padding: 70px 0;}
+            .section-title h2 {font-size:1.72rem;}
+            .hero h2 {font-size:2rem;}
+            .hero p {font-size:1.1rem;}
+            .stat-item {min-width:80px; padding:15px 20px;}
+            .stat-item h3 {font-size:1.5rem;}
+            .hero-btns {flex-direction:column; align-items:center;}
+            .hero-btns .btn {width:100%; max-width:280px; justify-content:center;}
+            .newsletter-form {flex-direction:column;}
+            .newsletter-form input {border-radius:var(--radius);}
+            .newsletter-form button {border-radius:var(--radius); padding:14px 20px; justify-content:center;}
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://img.icons8.com/ios-filled/100/4a9f8e/health-checkup.png" alt="Notre Santé Logo">
+                <h1>Notre Santé</h1>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home" class="active">Accueil</a></li>
+                    <li><a href="#features">Atouts</a></li>
+                    <li><a href="#regimes">Régimes</a></li>
+                    <li><a href="#videos">Motivation</a></li>
+                    <li><a href="#story">Inspiration</a></li>
+                    <li><a href="#testimonials">Témoignages</a></li>
+                    <li><a href="#newsletter">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in">Transformez votre santé, changez votre vie</h2>
+                <p class="fade-in delay-1">Des plans personnalisés, une vraie motivation, des conseils adaptés à chaque étape de votre vie.</p>
+                <div class="hero-btns fade-in delay-2">
+                    <a href="#regimes" class="btn"><i class="fas fa-utensils"></i> Découvrir les régimes</a>
+                    <a href="#videos" class="btn btn-outline"><i class="fas fa-play-circle"></i> Vidéos motivation</a>
+                </div>
+                <div class="hero-stats fade-in delay-3">
+                    <div class="stat-item"><h3>12K+</h3><p>Utilisateurs épanouis</p></div>
+                    <div class="stat-item"><h3>60+</h3><p>Coachs experts</p></div>
+                    <div class="stat-item"><h3>800+</h3><p>Recettes santé</p></div>
+                    <div class="stat-item"><h3>24/7</h3><p>Accompagnement</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pourquoi choisir Notre Santé ?</h2>
+                <p>Des solutions basées sur la science et l'humain pour des résultats durables.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Régimes personnalisés</h3>
+                    <p>Des plans adaptés à vos goûts, vos objectifs et votre rythme de vie. Notre intelligence artificielle évolue selon vos besoins.</p>
+                </div>
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Bien-être global</h3>
+                    <p>Méditation, gestion du stress, sommeil : un accompagnement complet pour l'esprit et le corps.</p>
+                </div>
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Motivation & Sport</h3>
+                    <p>Programmes vidéo adaptés à tous niveaux, suivi des progrès, conseils pour garder la motivation.</p>
+                </div>
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Suivi intelligent</h3>
+                    <p>Suivez vos indicateurs santé, votre évolution physique et mentale avec notre tableau de bord intuitif.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Communauté bienveillante</h3>
+                    <p>Partage d'expériences, entraide et défis collectifs pour se motiver chaque jour.</p>
+                </div>
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                    <h3>Coaching d'experts</h3>
+                    <p>Nutritionnistes, coachs sportifs et psychologues : un accompagnement personnalisé selon vos besoins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Régimes Section -->
+    <section class="features" id="regimes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Régimes santé : adaptés à chaque âge</h2>
+                <p>
+                    Parce que chaque étape de la vie a des besoins spécifiques, découvrez nos recommandations personnalisées pour prendre soin de votre santé à tout âge.<br>
+                    Nos nutritionnistes vous proposent des conseils sur-mesure pour allier plaisir, vitalité et prévention.
+                </p>
+            </div>
+            <div class="regime-cards-container">
+                <div class="regime-card regime-card-large fade-in">
+                    <div class="regime-img"><img src="https://lapetitebette.com/wp-content/uploads/2020/07/salade-cobb-miniature-blog.jpg" alt="Salade Cobb"></div>
+                    <div class="regime-age">20-25 ans</div>
+                    <div class="regime-goal">Objectif&nbsp;: <span>Énergie, silhouette</span></div>
+                    <div class="regime-keyfoods"><i class="fas fa-apple-alt"></i> Aliments clés&nbsp;: <span>Poulet, œufs, quinoa, fruits, légumes</span></div>
+                    <div class="regime-tips"><i class="fas fa-lightbulb"></i> <span>Bouger beaucoup, attention fast-food</span></div>
+                </div>
+                <div class="regime-card regime-card-large fade-in delay-1">
+                    <div class="regime-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Repas équilibré"></div>
+                    <div class="regime-age">26-31 ans</div>
+                    <div class="regime-goal">Objectif&nbsp;: <span>Métabolisme, vitalité</span></div>
+                    <div class="regime-keyfoods"><i class="fas fa-fish"></i> Aliments clés&nbsp;: <span>Poisson, avocat, patates douces, graines</span></div>
+                    <div class="regime-tips"><i class="fas fa-lightbulb"></i> <span>Éviter le sucre, privilégier le frais</span></div>
+                </div>
+                <div class="regime-card regime-card-large fade-in delay-2">
+                    <div class="regime-img"><img src="data:image/jpeg;base64,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" alt="Légumes variés"></div>
+                    <div class="regime-age">32-40 ans</div>
+                    <div class="regime-goal">Objectif&nbsp;: <span>Gestion du poids</span></div>
+                    <div class="regime-keyfoods"><i class="fas fa-seedling"></i> Aliments clés&nbsp;: <span>Légumes verts, légumineuses, yaourt</span></div>
+                    <div class="regime-tips"><i class="fas fa-lightbulb"></i> <span>Fractionner les repas, sport régulier</span></div>
+                </div>
+                <div class="regime-card regime-card-large fade-in delay-3">
+                    <div class="regime-img"><img src="https://anaca3.com/wp-content/uploads/2018/02/3-plats-a-base-de-poisson-pour-maigrir-702x336.jpg" alt="Noix et céréales"></div>
+                    <div class="regime-age">41-51 ans</div>
+                    <div class="regime-goal">Objectif&nbsp;: <span>Tonus, prévention</span></div>
+                    <div class="regime-keyfoods"><i class="fas fa-bread-slice"></i> Aliments clés&nbsp;: <span>Poissons gras, noix, céréales complètes</span></div>
+                    <div class="regime-tips"><i class="fas fa-lightbulb"></i> <span>Calcium, vitamine D, limiter sel/sucre</span></div>
+                </div>
+            </div>
+            <div class="text-center mt-40">
+                <a href="#newsletter" class="btn btn-accent"><i class="fas fa-envelope"></i> Demander un programme personnalisé</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vidéos Motivation & Régimes -->
+    <section class="video-section" id="videos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vidéos Motivation & Régimes</h2>
+                <p>Découvrez des vidéos inspirantes pour comprendre les régimes adaptés et booster votre motivation !</p>
+            </div>
+            <div class="video-container">
+                <!-- Video 1 -->
+                <div class="video-card fade-in">
+                    <div class="video-thumbnail">
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/_wQEImwv9hQ" 
+                                title="Régime méditerranéen" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Régime méditerranéen pour débutants</h3>
+                        <p>Découvrez les bases de ce régime reconnu pour ses bienfaits sur la santé.</p>
+                        <div class="video-meta">
+                            <span class="video-duration"><i class="far fa-clock"></i> 11:05</span>
+                            <span class="video-views"><i class="far fa-eye"></i> 25K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card fade-in delay-1">
+                    <div class="video-thumbnail">
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/lUZ_tOzOgDQ" 
+                                title="Motivation sport" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Motivation Sport : 5 minutes pour tout changer</h3>
+                        <p>Une vidéo puissante pour booster ta motivation et ne jamais abandonner !</p>
+                        <div class="video-meta">
+                            <span class="video-duration"><i class="far fa-clock"></i> 17:10</span>
+                            <span class="video-views"><i class="far fa-eye"></i> 42K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card fade-in delay-2">
+                    <div class="video-thumbnail">
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/mVI6fSwbrg4" 
+                                title="Témoignage sport" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Témoignage transformation physique</h3>
+                        <p>L'histoire vraie d'un jeune qui a changé sa vie grâce au sport et à un régime adapté.</p>
+                        <div class="video-meta">
+                            <span class="video-duration"><i class="far fa-clock"></i> 10:06</span>
+                            <span class="video-views"><i class="far fa-eye"></i> 18K vues</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Storytelling Motivation -->
+    <section class="story-section" id="story">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ils l'ont fait, pourquoi pas vous ?</h2>
+                <p>Des histoires vraies, des conseils motivants, et le déclic pour passer à l'action !</p>
+            </div>
+            <div class="story-container">
+                <div class="story-card fade-in">
+                    <h3>L'histoire de Samira (32 ans)</h3>
+                    <p>"Après des années à douter, j'ai osé commencer le sport. Aujourd'hui, j'ai retrouvé confiance, énergie et sourire. Le plus dur, c'est le premier pas !"</p>
+                </div>
+                <div class="story-card fade-in delay-1">
+                    <h3>Conseil Motivation</h3>
+                    <p>Fixez-vous de petits objectifs chaque semaine. Célébrez chaque progrès, même minime : c'est la régularité qui fait la différence !</p>
+                </div>
+                <div class="story-card fade-in delay-2">
+                    <h3>L'histoire de Karim (41 ans)</h3>
+                    <p>"J'ai commencé un régime adapté à mon âge, j'ai perdu 10kg et gagné en vitalité. Entourez-vous de personnes positives, ça change tout !"</p>
+                </div>
+            </div>
+            <div class="text-center mt-40">
+                <a href="#regimes" class="btn"><i class="fas fa-utensils"></i> Je me lance dès aujourd'hui</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Témoignages</h2>
+                <p>Ils ont franchi le pas, et vous ?</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        "J'ai perdu 25 kg en 6 mois, sans frustration, juste avec un accompagnement et des encouragements. Je revis !"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Transformation physique</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in delay-1">
+                    <div class="testimonial-text">
+                        "Grâce à la communauté et aux coachs, j'ai gardé la motivation et retrouvé la forme, même après 40 ans !"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Énergie & bien-être</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in delay-2">
+                    <div class="testimonial-text">
+                        "Mon diabète est sous contrôle grâce aux conseils personnalisés et au suivi de Notre Santé. Merci !"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Maria Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Régime santé</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rejoignez la communauté santé</h2>
+                <p>Recevez chaque semaine nos conseils, recettes, plans sportifs et offres exclusives.</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Votre email" required>
+                <button type="submit">S'inscrire <i class="fas fa-paper-plane"></i></button>
+            </form>
+            <p class="text-center mt-20" style="color: rgba(255,255,255,0.7); font-size:0.9rem;">
+                Respect de votre vie privée. Désinscription à tout moment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Notre Santé</h3>
+                    <p>Votre partenaire confiance pour une santé durable. Nutrition, motivation, accompagnement : tout pour changer votre vie.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Atouts</a></li>
+                        <li><a href="#regimes"><i class="fas fa-chevron-right"></i> Régimes</a></li>
+                        <li><a href="#videos"><i class="fas fa-chevron-right"></i> Motivation</a></li>
+                        <li><a href="#story"><i class="fas fa-chevron-right"></i> Inspiration</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Témoignages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ressources</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Recettes</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Plans sportifs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Calculatrices santé</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Challenges bien-être</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Rue Santé, Paris</a></li>
+                        <li><a href="mailto:info@notresante.com"><i class="fas fa-envelope"></i> info@notresante.com</a></li>
+                        <li><a href="tel:+11234567890"><i class="fas fa-phone-alt"></i> 01 23 45 67 89</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Lun-Ven : 9h-18h</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Sam : 10h-16h</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Notre Santé. Tous droits réservés. | <a href="#" style="color: var(--accent);">Politique de confidentialité</a> | <a href="#" style="color: var(--accent);">Conditions d'utilisation</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('nav');
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({top: targetElement.offsetTop - 80, behavior: 'smooth'});
+                    document.querySelectorAll('nav ul li a').forEach(link => {link.classList.remove('active');});
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) backToTopBtn.classList.add('active');
+            else backToTopBtn.classList.remove('active');
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        // Set active nav link based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialize elements as invisible
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
